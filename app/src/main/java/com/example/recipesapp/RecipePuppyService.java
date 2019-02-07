@@ -6,5 +6,7 @@ import retrofit2.http.Query;
 
 public interface RecipePuppyService {
     @GET("api/")
-    Call<RecipesResponse> searchByIngredient(@Query("i") String ingredients, @Query("q") String query);
+    Call<RecipesResponse> searchByIngredient(
+            @Query("i") String ingredients,
+            @Query("q") String query);
 }

@@ -1,6 +1,9 @@
 package com.example.recipesapp;
 
-public class Recipe {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Recipe implements Parcelable{
     private String title;
     private String href;
     private String ingredients;
@@ -15,6 +18,38 @@ public class Recipe {
 
     public Recipe() {
     }
+
+    protected Recipe(Parcel in) {
+        title = in.readString();
+        href = in.readString();
+        ingredients = in.readString();
+        thumbnail = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(href);
+        dest.writeString(ingredients);
+        dest.writeString(thumbnail);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
+        @Override
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
 
     public String getTitle() {
         return title;
